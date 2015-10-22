@@ -1,6 +1,6 @@
 import React from 'react'
-import App from './public/scripts/app.js'
+import Customizer from './public/scripts/customizer.js'
 
 React.render((
-  <App/>
+  <Customizer/>
 ), document.getElementById('selector'));
