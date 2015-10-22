@@ -1,18 +1,30 @@
 import React from 'react'
 import ReactTestUtils from 'react-addons-test-utils'
 import Customizer from '../public/scripts/customizer.js'
+import FixtureData from '../fixtures/data.js'
+let fixtures = new FixtureData;
 
-let customizer;
+let page;
+let setUpPage = (() => {
+  page = document.createElement("DIV");
+  page.setAttribute("id", 'test-content');
+  document.body.appendChild(page);
+});
 
 describe('Customizer', () => {
-
   beforeEach(()=>{
-    const shallowRenderer = ReactTestUtils.createRenderer();
-    shallowRenderer.render(React.createElement(Customizer, { className: 'MyComponent' }, 'some child text'));
-    customizer = shallowRenderer.getRenderOutput();
+    let data = fixtures.customizations();
+
+    setUpPage();
+    React.render((
+      <Customizer data={data} />
+    ), document.getElementById('test-content'));
   });
 
-  it('should display text', () => {
-    expect(customizer.props.children).toEqual('Hello World');
-  })
+  it('should display four options', () => {
+    expect(page.innerText).toContain('Container');
+    expect(page.innerText).toContain('Ice Cream');
+    expect(page.innerText).toContain('Sauces');
+    expect(page.innerText).toContain('Toppings');
+  });
 });
