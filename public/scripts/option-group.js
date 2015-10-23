@@ -8,9 +8,12 @@ export default class OptionSelector extends React.Component  {
   }
 
   setOptionAsActiveForGroup(option) {
+    let indexOfExistingOption = this.state.selectedOptions.indexOf(option)
 
-    if (this.state.selectedOptions.indexOf(option) === -1) {
+    if (indexOfExistingOption === -1) {
       this.state.selectedOptions.push(option);
+    } else {
+      this.state.selectedOptions.splice(indexOfExistingOption, 1)
     }
     //this.props.addOptionToActive(option);
 

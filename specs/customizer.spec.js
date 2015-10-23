@@ -87,7 +87,13 @@ describe('Features', () => {
 
         expect(mediumOption.outerHTML).not.toContain('teal');
         expect(largeOption.outerHTML).toContain('teal');
-      })
-    })
-  })
+      });
+
+      it("should toggle an option as selected/unselected when clicked", () => {
+        expect(mediumOption.outerHTML).toContain('teal');
+        TestUtils.Simulate.click(mediumOption);
+        expect(mediumOption.outerHTML).not.toContain('teal');
+      });
+    });
+  });
 });
