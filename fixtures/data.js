@@ -3,8 +3,8 @@ export default class FixtureData {
     return [
       {
         "name": "Container",
-        "selections": {
-          "size": {
+        "selections": [
+          {
             "name": "Size",
             "allowableCount": 1,
             "choices": [
@@ -13,8 +13,7 @@ export default class FixtureData {
               {"name": "Large"}
             ]
           },
-
-          "material": {
+          {
             "name": "Material",
             "allowableCount": 1,
             "choices": [
@@ -25,12 +24,12 @@ export default class FixtureData {
               {"name": "Collector Bowl"}
             ]
           }
-        }
+        ]
       },
       {
         "name": "Ice Cream",
-        "selections": {
-          "flavor": {
+        "selections": [
+          {
             "name": "Flavor",
             "allowableCount": 3,
             "choices": [
@@ -41,12 +40,12 @@ export default class FixtureData {
               {"name": "Coffee"}
             ]
           }
-        }
+        ]
       },
       {
         "name": "Sauces",
-        "selections": {
-          "flavor": {
+        "selections": [
+          {
             "name": "Flavor",
             "allowableCount": 1,
             "choices": [
@@ -58,12 +57,12 @@ export default class FixtureData {
               {"name": "Marshmallow Fluff"}
             ]
           }
-        }
+        ]
       },
       {
         "name": "Toppings",
-        "selections": {
-          "nuts": {
+        "selections": [
+          {
             "name": "Nuts",
             "allowableCount": 1,
             "choices": [
@@ -73,7 +72,7 @@ export default class FixtureData {
               {"name": "Almonds"}
             ]
           },
-          "sprinkles": {
+          {
             "name": "Sprinkles",
             "allowableCount": 1,
             "choices": [
@@ -82,7 +81,7 @@ export default class FixtureData {
               {"name": "Chocolate Chips"}
             ]
           },
-          "miscellaneous": {
+          {
             "name": "Miscellaneous",
             "allowableCount": 3,
             "choices": [
@@ -91,7 +90,7 @@ export default class FixtureData {
               {"name": "Nutella"}
             ]
           }
-        }
+        ]
       }
     ]
   }
