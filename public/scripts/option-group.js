@@ -2,44 +2,49 @@ import React from 'react'
 import Option from './option.js'
 
 export default class OptionGroup extends React.Component  {
-
-  componentWillMount () {
-    this.state = {selectedOptions: []};
-  }
-
-  componentDiDMount() {
-    this.setState({selectedOptions: this.props.globalOptions});
+  constructor(props) {
+    super();
+    this.state = {
+      groupSelections: []
+    }
   }
 
   setOptionAsActiveForGroup(option) {
-    let isSelected = (this.state.selectedOptions.indexOf(option) > -1);
+    this.toggleOption(option);
+    this.validateAllowableCount();
+    this.props.setGlobalUserSelection(this.props.groupKey, this.state.groupSelections);
+  }
 
+  addToSelectedOptions(option) {
+    let cloneOfGroupSelections = (JSON.parse(JSON.stringify(this.state.groupSelections)));
+    cloneOfGroupSelections.push(option);
+    this.setState({groupSelections: cloneOfGroupSelections})
+  }
+
+  removeFromSelectedOptions(option) {
+    let index = this.state.groupSelections.indexOf(option);
+    let cloneOfGroupSelections = (JSON.parse(JSON.stringify(this.state.groupSelections)));
+    cloneOfGroupSelections.splice(index, 1);
+    this.setState({groupSelections: cloneOfGroupSelections})
+  }
+
+  toggleOption(option){
+    let isSelected = (this.state.groupSelections.indexOf(option) > -1);
     if (isSelected) {
       this.removeFromSelectedOptions(option);
     } else {
       this.addToSelectedOptions(option);
     }
-
-    let exceedsAllowableCount = (this.state.selectedOptions.length > this.props.group.allowableCount);
-    if (exceedsAllowableCount) { this.removeFromSelectedOptions(this.state.selectedOptions[0]); }
-
-    console.log('groups selectedOptions', this.state.selectedOptions);
   }
 
-  addToSelectedOptions(option) {
-    this.state.selectedOptions.push(option);
-    this.setState({selectedOptions: this.state.selectedOptions})
-  }
-
-  removeFromSelectedOptions(option) {
-    let index = this.state.selectedOptions.indexOf(option);
-    this.state.selectedOptions.splice(index, 1);
-    this.setState({selectedOptions: this.state.selectedOptions})
+  validateAllowableCount() {
+    let exceedsAllowableCount = (this.state.groupSelections.length > this.props.group.allowableCount);
+    if (exceedsAllowableCount) { this.removeFromSelectedOptions(this.state.groupSelections[0]); }
   }
 
   render() {
     let innerHTML = this.props.group.choices.map((userOption) => {
-      let isActive = (this.state.selectedOptions.indexOf(userOption) > -1);
+      let isActive = (this.state.groupSelections.indexOf(userOption) > -1);
       return (
         <Option
           userOption={userOption}
