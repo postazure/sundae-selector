@@ -10,7 +10,7 @@ export default class OptionSelector extends React.Component  {
         return(
           <h4 className="ui medium image user-choice">
             {name}
-            <img src="http://placehold.it/150x150"/>
+            <img src={"http://lorempixel.com/100/100/food/" + Math.floor(Math.random()*10).toString()}/>
           </h4>
         );
       });

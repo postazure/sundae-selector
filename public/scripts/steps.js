@@ -1,22 +1,21 @@
 import React from 'react'
+import Step from './step.js'
 
 export default class Steps extends React.Component  {
   render() {
-    let customizations = this.props.data.map((customization) => {
+    let steps = this.props.data.map((step) => {
+      let id = this.props.data.indexOf(step);
+      console.log("id: ", id);
       return(
-        <div className={(this.props.data.indexOf(customization) === 0) ? "active step" : "step"}>
-          <div className="content">
-            <div className="title">{customization.name}</div>
-            <div className="description">Verify order details</div>
-          </div>
+        <div>
+          <Step stepId={id} step={step} isActive={id === this.props.activeStep} setActiveStep={this.props.setActiveStep}/>
         </div>
       );
     });
 
     return (
-
       <div className="ui ordered steps">
-        {customizations}
+        {steps}
       </div>
     )
   }
