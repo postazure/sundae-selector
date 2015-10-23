@@ -10,13 +10,13 @@ export default class OptionSelector extends React.Component  {
         return(
           <h4 className="ui medium image user-choice">
             {name}
-            <img src="/images/wireframe/image-text.png"/>
+            <img src="http://placehold.it/150x150"/>
           </h4>
         );
       });
 
       return(
-        <div className="ui tiny images">
+        <div className="ui tiny images user-choices">
           {innerHTML}
         </div>
       )

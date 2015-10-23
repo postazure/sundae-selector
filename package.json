@@ -34,6 +34,7 @@
     "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.18",
     "react-addons-test-utils": "^0.14.0",
+    "react-dom": "^0.14.0",
     "webpack": "^1.12.2"
   },
   "dependencies": {
