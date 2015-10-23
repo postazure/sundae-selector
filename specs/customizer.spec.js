@@ -33,6 +33,10 @@ describe('Features', () => {
       let activeStep = TestUtils.findRenderedDOMComponentWithClass(customizer, 'active step');
       expect(activeStep.innerText).toContain('Container')
     });
+
+    it("should display a preview of the chosen options", () => {
+      expect(!! TestUtils.findRenderedDOMComponentWithClass(customizer, 'preview')).toBe(true)
+    })
   });
 
   describe("Changing Steps", () =>{
