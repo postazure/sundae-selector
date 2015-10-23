@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class Option extends React.Component  {
   handleClick(){
-    this.props.setOptionAsActive(this.props.userOption);
+    this.props.setOptionAsActiveForGroup(this.props.userOption);
   }
 
   render() {

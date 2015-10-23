@@ -77,6 +77,16 @@ describe('Features', () => {
       
       it("shows that the option has been selected", () => {
         expect(mediumOption.outerHTML).toContain('teal');
+      });
+
+      it("should only have upto 'N' options selected at a time", () => {
+        expect(mediumOption.outerHTML).toContain('teal');
+
+        let largeOption = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice')[2];
+        TestUtils.Simulate.click(largeOption);
+
+        expect(mediumOption.outerHTML).not.toContain('teal');
+        expect(largeOption.outerHTML).toContain('teal');
       })
     })
   })

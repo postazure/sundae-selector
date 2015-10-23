@@ -1,5 +1,5 @@
 import React from 'react'
-import Option from './option.js'
+import OptionGroup from './option-group.js'
 
 export default class OptionSelector extends React.Component  {
   constructor() {
@@ -9,28 +9,13 @@ export default class OptionSelector extends React.Component  {
 
   setOptionAsActive(option) {
     this.state.selectedOptions.push(option);
-    this.forceUpdate()
   }
 
   render() {
     let i = this.props.activeStep;
     let optionGroups = this.props.data[i].selections.map((optionGroup) => {
-      let innerHTML = optionGroup.choices.map((userOption) => {
-        let isActive = (this.state.selectedOptions.indexOf(userOption) > -1);
-        return(
-          <Option
-            userOption={userOption}
-            isActive={isActive}
-            setOptionAsActive={this.setOptionAsActive.bind(this)}
-          />
-        );
-
-      });
-
       return(
-        <div className="ui tiny images user-choices">
-          {innerHTML}
-        </div>
+        <OptionGroup group={optionGroup}/>
       )
     });
 
