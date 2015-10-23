@@ -1,34 +1,44 @@
 import React from 'react'
 import Option from './option.js'
 
-export default class OptionSelector extends React.Component  {
-  constructor() {
-    super();
+export default class OptionGroup extends React.Component  {
+
+  componentWillMount () {
     this.state = {selectedOptions: []};
   }
 
+  componentDiDMount() {
+    this.setState({selectedOptions: this.props.globalOptions});
+  }
+
   setOptionAsActiveForGroup(option) {
-    let indexOfExistingOption = this.state.selectedOptions.indexOf(option)
+    let isSelected = (this.state.selectedOptions.indexOf(option) > -1);
 
-    if (indexOfExistingOption === -1) {
-      this.state.selectedOptions.push(option);
+    if (isSelected) {
+      this.removeFromSelectedOptions(option);
     } else {
-      this.state.selectedOptions.splice(indexOfExistingOption, 1)
-    }
-    //this.props.addOptionToActive(option);
-
-    if (this.state.selectedOptions.length > this.props.group.allowableCount) {
-      this.state.selectedOptions.shift();
-      console.log('after removal', this.state.selectedOptions);
+      this.addToSelectedOptions(option);
     }
 
-    this.setState({selectedOptions: this.state.selectedOptions});
-    //this.props.removeOptionToActive(oldOption)
+    let exceedsAllowableCount = (this.state.selectedOptions.length > this.props.group.allowableCount);
+    if (exceedsAllowableCount) { this.removeFromSelectedOptions(this.state.selectedOptions[0]); }
+
+    console.log('groups selectedOptions', this.state.selectedOptions);
+  }
+
+  addToSelectedOptions(option) {
+    this.state.selectedOptions.push(option);
+    this.setState({selectedOptions: this.state.selectedOptions})
+  }
+
+  removeFromSelectedOptions(option) {
+    let index = this.state.selectedOptions.indexOf(option);
+    this.state.selectedOptions.splice(index, 1);
+    this.setState({selectedOptions: this.state.selectedOptions})
   }
 
   render() {
     let innerHTML = this.props.group.choices.map((userOption) => {
-      console.log('in render', this.state.selectedOptions);
       let isActive = (this.state.selectedOptions.indexOf(userOption) > -1);
       return (
         <Option

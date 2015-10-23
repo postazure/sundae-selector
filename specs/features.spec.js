@@ -67,33 +67,39 @@ describe('Features', () => {
   });
 
   describe("Selecting Options", () => {
-    describe("when user clicks on an option", () => {
-      let mediumOption;
-      
-      beforeEach(() => {
-        mediumOption = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice')[1];
-        TestUtils.Simulate.click(mediumOption);
-      });
-      
-      it("shows that the option has been selected", () => {
-        expect(mediumOption.outerHTML).toContain('teal');
-      });
+    it("should maintain selected options between steps ", () => {
+      let steps = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'step')
+      let stepOne = steps[0];
+      let stepTwo = steps[1];
+      let stepThree = steps[2];
 
-      it("should only have upto 'N' options selected at a time", () => {
-        expect(mediumOption.outerHTML).toContain('teal');
+      TestUtils.Simulate.click(stepOne);
+      let sizes = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
+      TestUtils.Simulate.click(sizes[1]);
 
-        let largeOption = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice')[2];
-        TestUtils.Simulate.click(largeOption);
+      TestUtils.Simulate.click(stepTwo);
+      let flavors = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
+      TestUtils.Simulate.click(flavors[0]);
+      TestUtils.Simulate.click(flavors[1]);
+      TestUtils.Simulate.click(flavors[2]);
 
-        expect(mediumOption.outerHTML).not.toContain('teal');
-        expect(largeOption.outerHTML).toContain('teal');
-      });
+      TestUtils.Simulate.click(stepThree);
+      let sauces = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
+      TestUtils.Simulate.click(sauces[0]);
 
-      it("should toggle an option as selected/unselected when clicked", () => {
-        expect(mediumOption.outerHTML).toContain('teal');
-        TestUtils.Simulate.click(mediumOption);
-        expect(mediumOption.outerHTML).not.toContain('teal');
-      });
+      TestUtils.Simulate.click(stepOne);
+      let selectionStep1 = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice')[1];
+      expect(selectionStep1.outerHTML).toContain('teal');
+
+      TestUtils.Simulate.click(stepTwo);
+      let selectionStep2 = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
+      expect(selectionStep2[0].outerHTML).toContain('teal');
+      expect(selectionStep2[1].outerHTML).toContain('teal');
+      expect(selectionStep2[3].outerHTML).toContain('teal');
+
+      TestUtils.Simulate.click(stepThree);
+      let selectionStep3 = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
+      expect(selectionStep3[0].outerHTML).toContain('teal');
     });
   });
 });
