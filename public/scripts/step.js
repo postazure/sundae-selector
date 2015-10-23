@@ -3,7 +3,6 @@ import React from 'react'
 export default class Steps extends React.Component  {
   handleClick() {
     this.props.setActiveStep(this.props.stepId);
-     console.log("StepId ", this.props.stepId);
   }
 
   render() {

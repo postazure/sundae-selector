@@ -37,13 +37,28 @@ describe('Features', () => {
 
   describe("Changing Steps", () =>{
     describe("when the user clicks on a different Step", () => {
-      it("shows the new Step as active", () => {
+      beforeEach(() => {
         let nextStepButton = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'step')[1];
         TestUtils.Simulate.click(nextStepButton);
+      });
 
+      it("shows the new Step as active", () => {
         let activeStep = TestUtils.findRenderedDOMComponentWithClass(customizer, 'active step');
         expect(activeStep.innerText).toContain("Ice Cream")
       });
+
+      it("displays the options for the active Step", () => {
+        let optionNodes = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
+        let options = optionNodes.map((option) => {
+          return (option.innerHTML)
+        });
+
+        expect(
+          helper.matchArray(
+            options, ['Vanilla', 'Chocolate', 'Pumpkin', 'Rocky Road', 'Coffee']
+          )
+        ).toBe(true)
+      })
     });
   });
 });
