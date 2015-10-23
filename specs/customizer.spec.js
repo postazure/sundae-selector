@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
+import Helper from './support/helper.js'
 import Customizer from '../public/scripts/customizer.js'
 import FixtureData from '../fixtures/data.js'
 
+const helper = new Helper;
 describe('Customizer', () => {
   let customizer;
   let data;
@@ -19,10 +21,11 @@ describe('Customizer', () => {
       return(title.innerHTML)
     });
 
-    expect(titles).toContain('Container');
-    expect(titles).toContain('Ice Cream');
-    expect(titles).toContain('Sauces');
-    expect(titles).toContain('Toppings');
+    expect(
+        helper.matchArray(
+            titles, ['Container', 'Ice Cream', 'Sauces', 'Toppings']
+        )
+    ).toBe(true)
   });
 
   it("should display the first step as active by default", () => {
