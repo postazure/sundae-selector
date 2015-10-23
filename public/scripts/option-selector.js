@@ -1,18 +1,30 @@
 import React from 'react'
+import Option from './option.js'
 
 export default class OptionSelector extends React.Component  {
-  render() {
+  constructor() {
+    super();
+    this.state = {selectedOptions: []};
+  }
 
+  setOptionAsActive(option) {
+    this.state.selectedOptions.push(option);
+    this.forceUpdate()
+  }
+
+  render() {
     let i = this.props.activeStep;
     let optionGroups = this.props.data[i].selections.map((optionGroup) => {
       let innerHTML = optionGroup.choices.map((userOption) => {
-        let name = userOption['name'];
+        let isActive = (this.state.selectedOptions.indexOf(userOption) > -1);
         return(
-          <h4 className="ui medium image user-choice">
-            {name}
-            <img src={"http://lorempixel.com/100/100/food/" + Math.floor(Math.random()*10).toString()}/>
-          </h4>
+          <Option
+            userOption={userOption}
+            isActive={isActive}
+            setOptionAsActive={this.setOptionAsActive.bind(this)}
+          />
         );
+
       });
 
       return(

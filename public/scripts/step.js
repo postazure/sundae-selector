@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class Steps extends React.Component  {
+export default class Step extends React.Component  {
   handleClick() {
     this.props.setActiveStep(this.props.stepId);
   }

@@ -65,4 +65,19 @@ describe('Features', () => {
       })
     });
   });
+
+  describe("Selecting Options", () => {
+    describe("when user clicks on an option", () => {
+      let mediumOption;
+      
+      beforeEach(() => {
+        mediumOption = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice')[1];
+        TestUtils.Simulate.click(mediumOption);
+      });
+      
+      it("shows that the option has been selected", () => {
+        expect(mediumOption.outerHTML).toContain('teal');
+      })
+    })
+  })
 });
