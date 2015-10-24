@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
-import Helper from './support/helper.js'
-import OptionSelector from '../public/scripts/option-selector.js'
-import FixtureData from '../fixtures/data.js'
+import Helper from './../../support/helper.js'
+import OptionSelector from '../../../public/scripts/option-selector/option-selector.js'
+import FixtureData from '../../../fixtures/data.js'
 
 const helper = new Helper;
 describe('Option Selector', () => {

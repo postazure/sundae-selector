@@ -1,14 +1,15 @@
 import React from 'react'
-import Steps from './steps.js'
-import OptionSelector from './option-selector.js'
-import Preview from './preview.js'
+import Steps from './steps/steps.js'
+import OptionSelector from './option-selector/option-selector.js'
+import Preview from './preview/preview.js'
 
 export default class Customizer extends React.Component  {
   constructor() {
     super();
     this.state = {
       activeStep: 0,
-      userSelections: {}
+      userSelections: {},
+      cost: 0
     };
     this.setActiveStep = this.setActiveStep.bind(this);
     this.setUserSelection = this.setUserSelection.bind(this);

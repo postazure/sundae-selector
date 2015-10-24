@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
-import Helper from './support/helper.js'
-import Customizer from '../public/scripts/customizer.js'
-import FixtureData from '../fixtures/data.js'
+import Helper from '../support/helper.js'
+import Customizer from '../../public/scripts/customizer.js'
+import FixtureData from '../../fixtures/data.js'
 
 const helper = new Helper;
 describe('Features', () => {
@@ -40,7 +40,11 @@ describe('Features', () => {
 
     it("should display a preview of the chosen options", () => {
       expect(!! TestUtils.findRenderedDOMComponentWithClass(customizer, 'preview')).toBe(true)
-    })
+    });
+
+    it("should have an initial cost of 0", () => {
+      expect(customizer.state.cost).toEqual(0);
+    });
   });
 
   describe("Changing Steps", () =>{
