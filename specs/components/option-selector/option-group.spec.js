@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
-import Helper from './support/helper.js'
-import OptionGroup from '../public/scripts/option-group.js'
+import Helper from './../../support/helper.js'
+import OptionGroup from '../../../public/scripts/option-selector/option-group.js'
 
 const helper = new Helper;
 
