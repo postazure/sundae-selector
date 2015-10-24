@@ -23,9 +23,12 @@ describe('OptionGroup', () => {
 
   beforeEach(() => {
     optionGroup = TestUtils.renderIntoDocument(
-      <OptionGroup group={data}
-
-        />
+      <OptionGroup
+        group={data}
+        setGlobalUserSelection={()=>{}}
+        groupKey={'foo'}
+        selectedOptions={[]}
+      />
     )
   });
 

@@ -33,6 +33,7 @@ export default class Customizer extends React.Component  {
           data={this.props.data}
           activeStep={this.state.activeStep}
           setGlobalUserSelection={this.setUserSelection}
+          selectedOptions={this.state.userSelections}
         />
         <Preview/>
       </div>

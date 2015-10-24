@@ -6,51 +6,69 @@ export default class OptionGroup extends React.Component  {
     super();
     this.state = {
       groupSelections: []
-    }
+    };
+    this.validateAllowableCount = this.validateAllowableCount.bind(this)
+  }
+
+  componentWillMount() {
+    this.setState({groupSelections: this.props.selectedOptions})
   }
 
   setOptionAsActiveForGroup(option) {
-    this.toggleOption(option);
-    this.validateAllowableCount();
-    this.props.setGlobalUserSelection(this.props.groupKey, this.state.groupSelections);
+    let optionsList = this.toggleOption(option, this.validateAllowableCount);
+    this.setState({groupSelections: optionsList}, () => {
+      this.props.setGlobalUserSelection(this.props.groupKey, this.state.groupSelections);
+    });
   }
 
-  addToSelectedOptions(option) {
+  addToSelectedOptions(option, groupOptions, validate) {
+    groupOptions.push(option);
+    return(validate(groupOptions));
+  }
+
+  removeFromSelectedOptions(option, groupOptions) {
+    let index = groupOptions.indexOf(option);
+    groupOptions.splice(index, 1);
+    return(groupOptions);
+  }
+
+  toggleOption(option, validate){
     let cloneOfGroupSelections = (JSON.parse(JSON.stringify(this.state.groupSelections)));
-    cloneOfGroupSelections.push(option);
-    this.setState({groupSelections: cloneOfGroupSelections})
-  }
 
-  removeFromSelectedOptions(option) {
-    let index = this.state.groupSelections.indexOf(option);
-    let cloneOfGroupSelections = (JSON.parse(JSON.stringify(this.state.groupSelections)));
-    cloneOfGroupSelections.splice(index, 1);
-    this.setState({groupSelections: cloneOfGroupSelections})
-  }
+    let isSelected;
+    cloneOfGroupSelections.forEach((selection) => {
+      if (selection.name === option.name) {isSelected = true;}
+    });
 
-  toggleOption(option){
-    let isSelected = (this.state.groupSelections.indexOf(option) > -1);
     if (isSelected) {
-      this.removeFromSelectedOptions(option);
+      return(this.removeFromSelectedOptions(option, cloneOfGroupSelections));
     } else {
-      this.addToSelectedOptions(option);
+      return(this.addToSelectedOptions(option, cloneOfGroupSelections, validate));
     }
   }
 
-  validateAllowableCount() {
-    let exceedsAllowableCount = (this.state.groupSelections.length > this.props.group.allowableCount);
-    if (exceedsAllowableCount) { this.removeFromSelectedOptions(this.state.groupSelections[0]); }
+  validateAllowableCount(options) {
+    let exceedsAllowableCount = (options.length > this.props.group.allowableCount);
+    if (exceedsAllowableCount) {
+      options.shift();
+    }
+    return(options);
   }
 
   render() {
     let innerHTML = this.props.group.choices.map((userOption) => {
-      let isActive = (this.state.groupSelections.indexOf(userOption) > -1);
+      let isActive;
+      this.state.groupSelections.forEach((selectedOption) => {
+        if (selectedOption.name === userOption.name) {isActive = true;}
+      });
+
       return (
         <Option
           userOption={userOption}
           isActive={isActive}
           setOptionAsActiveForGroup={this.setOptionAsActiveForGroup.bind(this)}
-          />
+          key={JSON.stringify(userOption)}
+        />
       );
     });
 

@@ -6,9 +6,13 @@ export default class Steps extends React.Component  {
     let steps = this.props.data.map((step) => {
       let id = this.props.data.indexOf(step);
       return(
-        <div>
-          <Step stepId={id} step={step} isActive={id === this.props.activeStep} setActiveStep={this.props.setActiveStep}/>
-        </div>
+        <Step
+            key={id}
+            stepId={id}
+            step={step}
+            isActive={id === this.props.activeStep}
+            setActiveStep={this.props.setActiveStep}
+        />
       );
     });
 

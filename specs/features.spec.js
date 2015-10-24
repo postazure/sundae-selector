@@ -12,7 +12,11 @@ describe('Features', () => {
 
   beforeEach(()=>{
     data = (new FixtureData).customizations();
-    customizer = TestUtils.renderIntoDocument(<Customizer data={data} />);
+    customizer = TestUtils.renderIntoDocument(
+      <Customizer
+        data={data}
+      />
+    );
   });
 
   describe("Initial Load", () => {
@@ -95,7 +99,7 @@ describe('Features', () => {
       let selectionStep2 = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');
       expect(selectionStep2[0].outerHTML).toContain('teal');
       expect(selectionStep2[1].outerHTML).toContain('teal');
-      expect(selectionStep2[3].outerHTML).toContain('teal');
+      expect(selectionStep2[2].outerHTML).toContain('teal');
 
       TestUtils.Simulate.click(stepThree);
       let selectionStep3 = TestUtils.scryRenderedDOMComponentsWithClass(customizer, 'user-choice');

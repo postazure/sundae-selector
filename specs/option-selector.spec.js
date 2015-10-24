@@ -14,7 +14,12 @@ describe('Option Selector', () => {
   beforeEach(()=>{
     data = (new FixtureData).customizations();
     optionSelector = TestUtils.renderIntoDocument(
-        <OptionSelector data={data} activeStep={activeStep}/>
+      <OptionSelector
+        data={data}
+        activeStep={activeStep}
+        setGlobalUserSelection={()=>{}}
+        selectedOptions={{}}
+      />
     );
   });
 

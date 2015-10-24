@@ -12,6 +12,8 @@ export default class OptionSelector extends React.Component  {
           group={optionGroup}
           setGlobalUserSelection={this.props.setGlobalUserSelection}
           groupKey={key}
+          key={key}
+          selectedOptions={this.props.selectedOptions[key] || []}
         />
       )
     });
