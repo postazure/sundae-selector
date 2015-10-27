@@ -36,7 +36,7 @@ export default class Customizer extends React.Component  {
           setGlobalUserSelection={this.setUserSelection}
           selectedOptions={this.state.userSelections}
         />
-        <Preview/>
+        <Preview selectedOptions={this.state.userSelections} />
       </div>
     )
   }
